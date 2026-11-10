@@ -52,6 +52,7 @@ jobs:
           path: target/*.war
       # 6. Install SonarQube Scanner CLI
       - name: Install SonarQube Scanner CLI
+        if: ${{ secrets.SONAR_HOST != '' && secrets.SONAR_TOKEN != '' }}
         run: |
           if [ ! -d "$HOME/sonar-scanner-cli" ]; then
             echo "Downloading SonarQube Scanner CLI..."
@@ -63,6 +64,7 @@ jobs:
           sonar-scanner -v
       # 7. SonarQube analysis
       - name: SonarQube Analysis
+        if: ${{ secrets.SONAR_HOST != '' && secrets.SONAR_TOKEN != '' }}
         env:
           SONAR_HOST: ${{ secrets.SONAR_HOST }}
           SONAR_LOGIN: ${{ secrets.SONAR_TOKEN }}
