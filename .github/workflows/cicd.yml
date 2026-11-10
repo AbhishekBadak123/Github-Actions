@@ -59,8 +59,8 @@ jobs:
         run: |
           mvn sonar:sonar \
             -Dsonar.projectKey=hotstar \
-            -Dsonar.host.url="$SONAR_HOST" \
-            -Dsonar.token="$SONAR_TOKEN"
+            -Dsonar.host.url="$(echo "$SONAR_HOST" | tr -d '\r\n')" \
+            -Dsonar.token="$(echo "$SONAR_TOKEN" | tr -d '\r\n')"
 
       # 6. Upload WAR artifact
       - name: Upload WAR Artifact
